@@ -3,6 +3,7 @@ package br.com.baratellagabriel.correios.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.baratellagabriel.correios.exception.NoContentException;
 import br.com.baratellagabriel.correios.model.Address;
 import br.com.baratellagabriel.correios.model.Status;
 import br.com.baratellagabriel.correios.repository.AddressRepository;
@@ -21,11 +22,9 @@ public class CorreiosService {
 		return Status.READY;
 	}
 	
-	public Address getAddressByZipCode(String zipcode) {
+	public Address getAddressByZipCode(String zipcode) throws NoContentException {
 		
-		addressRepository.findById(zipcode);
-		
-		return null;
+		return addressRepository.findById(zipcode).orElseThrow(NoContentException::new);
 	}
 	
 	public void setup(){
