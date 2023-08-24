@@ -1,8 +1,11 @@
 package br.com.baratellagabriel.correios.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import br.com.baratellagabriel.correios.CorreiosApplication;
 import br.com.baratellagabriel.correios.exception.NoContentException;
 import br.com.baratellagabriel.correios.exception.NotReadyException;
 import br.com.baratellagabriel.correios.model.Address;
@@ -43,11 +46,13 @@ public class CorreiosService {
 		.build());
 	}
 	
+	@EventListener(ApplicationStartedEvent.class)
 	protected void setupOnStartup() {
 		try {
 			this.setup();
 		} catch (Exception e) {
 			e.printStackTrace();
+			CorreiosApplication.close(888);
 		}
 	}
 	

@@ -3,6 +3,7 @@ package br.com.baratellagabriel.correios.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -10,11 +11,11 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.apache.*;
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Repository;
 
 import br.com.baratellagabriel.correios.model.Address;
 
+@Repository
 public class SetupRepository {
 	
 	@Value("${correios.base.url}")
@@ -43,7 +44,7 @@ public class SetupRepository {
 					.city(currentLineSplited[1])
 					.district(currentLineSplited[2])
 					.zipcode(StringUtils.leftPad(currentLineSplited[3], 8, "0"))
-					.street(currentLineSplited.length > 3 ? currentLineSplited[4] : null).build());
+					.street(currentLineSplited.length > 4 ? currentLineSplited[4] : null).build());
 		}
 		
 		return resultList;
