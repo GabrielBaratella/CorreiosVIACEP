@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import br.com.baratellagabriel.correios.model.AddressStatus;
 
-public interface AddressStatusRepository extends CrudRepository<AddressStatus, String> {
+public interface AddressStatusRepository extends CrudRepository<AddressStatus, Integer> {
 
 }

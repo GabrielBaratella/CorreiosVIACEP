@@ -1,5 +1,8 @@
 package br.com.baratellagabriel.correios.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Address {
+	@Id
 	private String zipcode;
 	private String street;
 	private String district;
